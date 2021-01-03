@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Listagem de carros
+{% endblock %}
+
+{% block content %}
+
+    <form method="get">
+        <input type="text" name="busca" placeholder="Buscar modelo">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Ano</th>
+            <th>Valor</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for carro in lista %}
+            <tr>
+                <td>{{ carro.modelo }}</td>
+                <td>{{ carro.marca }}</td>
+                <td>{{ carro.ano }}</td>
+                <td>{{ carro.valor }}</td>
+                <td>
+                    <a href='{% url 'carro_edit' pk=carro.pk %}'>
+                        <i class="material-icons">mode_edit</i>
+                    </a>
+                    <a href='{% url 'carro_delete' pk=carro.pk %}'>
+                        <i class="material-icons">delete</i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="carro_new">
+        <button type="submit" class="btn btn-primary">
+            Cadastrar
+        </button>
+    </a>
+{% endblock %}
